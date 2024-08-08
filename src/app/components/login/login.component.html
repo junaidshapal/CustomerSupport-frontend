@@ -1,0 +1,28 @@
+<div class="body">
+  <div class="sidenav">
+      <div class="login-main-text">
+          <h2>CustomerSupport<br> Login</h2>
+          <p>Login from here to access.</p>
+      </div>
+  </div>
+  <div class="main">
+      <div class="col-md-6 col-sm-12">
+          <div class="login-form">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div *ngIf="showErrorMessage" class="alert alert-danger mt-3" [ngClass]="{'alert-fade-out': showErrorMessage}">
+                  {{ errorMessage }}
+              </div>
+                  <div class="form-group">
+                      <label>User Name</label>
+                      <input placeholder="*Username" type="text" id="username" formControlName="username" class="form-control form" [ngClass]="{ 'is-invalid': loginForm.get('username')?.touched && loginForm.get('username')?.invalid }">
+                  </div>
+                  <div class="form-group mt-3">
+                      <label>Password</label>
+                      <input placeholder="*Password" type="password" id="password" formControlName="password" class="form-control form" [ngClass]="{ 'is-invalid': loginForm.get('password')?.touched && loginForm.get('password')?.invalid }">
+                  </div>
+                  <button type="submit" class="btn btn-black mt-3">Login</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

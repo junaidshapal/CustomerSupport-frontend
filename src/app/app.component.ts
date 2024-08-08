@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './Services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'CustomerSupportApp';
+
+  constructor(private router: Router, public authService: AuthService) {}
+  
 }

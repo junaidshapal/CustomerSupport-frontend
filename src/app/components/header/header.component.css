@@ -1,0 +1,9 @@
+.navbar {
+    box-shadow: 0 2px 4px rgba(130, 123, 123, 0.666);
+  }
+  
+  .dropdown-menu-end {
+    right: 0;
+    left: auto;
+  }
+  

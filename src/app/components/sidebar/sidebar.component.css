@@ -1,0 +1,36 @@
+.sidebar {
+    width: 20vw; /* 1/5th of the viewport width */
+    padding-left: 0;
+  }
+  
+  .project-title {
+    background-color: #f8f9fa; /* Bootstrap light background color */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .nav-link {
+    margin-bottom: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+  }
+  
+  .mt-auto {
+    margin-top: auto;
+  }
+  
+
+  .logout{
+    cursor: pointer;
+  }

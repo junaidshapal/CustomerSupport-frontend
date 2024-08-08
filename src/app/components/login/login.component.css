@@ -1,0 +1,76 @@
+.body {
+    font-family: "Lato", sans-serif;
+}
+
+.main-head {
+    height: 150px;
+    background: #FFF;
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #000000;
+    overflow-x: hidden;
+    padding-top: 20px;
+    position: fixed;
+    width: 38%;
+    top: 0;
+    left: 0;
+}
+
+.main {
+    margin-left: 40%;
+    padding: 0px 10px;
+    position: relative;
+}
+
+.login-main-text {
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2 {
+    font-weight: 300;
+}
+
+.btn-black {
+    background-color: #000000 !important;
+    color: #fff;
+    width: 50%;
+}
+
+.login-form {
+    position: fixed;
+    top: 70%;
+    left: 40%;
+    transform: translateY(-50%);
+    width: 50%;
+}
+.form{
+    width: 50%;
+}
+
+button:hover{
+    opacity: 1rem;
+    color: aliceblue;
+}
+
+
+/*For error msg*/
+.alert {
+    transition: opacity 0.5s linear;
+}
+
+.alert-fade-out {
+    animation: fadeOut 2.5s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

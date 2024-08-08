@@ -1,0 +1,42 @@
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 3s forwards;
+}
+
+.success-message {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d4183d;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #85001d;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+.err-message {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #17a709;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #0e6401;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+

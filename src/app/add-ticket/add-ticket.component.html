@@ -1,0 +1,45 @@
+<div class="container">
+  <div *ngIf="showSuccessMessage" [ngClass]="{'fade-out': showSuccessMessage}" class="success-message">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="showCommentMessage" [ngClass]="{'fade-out': showCommentMessage}" class="err-message">
+    {{ commentMessage }}
+  </div>
+  <div *ngIf="showError" [ngClass]="{'fade-out': showSuccessMessage}" class="success-message" >
+    {{error}}
+  </div>
+
+  <h2 class = "alert alert-info">{{ ticket.id ? 'Update Ticket' : 'Add Ticket' }}</h2>
+  <form (ngSubmit)="saveTicket()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" [(ngModel)]="ticket.title" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" [(ngModel)]="ticket.description" name="description" required></textarea>
+    </div>
+    <div class="mt-2">
+      <label for="assignedTo">Assigned To</label>
+      <select id="assignedTo" class="form-select" [(ngModel)]="ticket.assignedTo" name="assignedTo" required>
+        <option *ngFor="let user of users" [value]="user.userId" selected>{{user.fullName}}</option>
+      </select>
+    </div>
+    <div class="mt-2">
+      <button type="submit" class="btn btn-primary">{{ ticket.id ? 'Update' : 'Save' }}</button>
+      <button type="button" class="btn btn-secondary" style="margin-left:10px;" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+
+
+  <div class="mt-4" *ngIf="ticket.id">
+    <h3 class="alert alert-info">Add Comment</h3>
+    <div>
+      <textarea [(ngModel)]="newComment.commentMessage" name="commentMessage" class="form-control" placeholder="Add your comment here" required></textarea>
+      <div class="mt-2">
+        <button type="submit" class="btn btn-primary" (click)="addComment()">Add Comment</button>
+      <button type="button" class="btn btn-secondary" style="margin-left:10px;" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
