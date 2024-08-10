@@ -5,7 +5,6 @@ import { AddTicketComponent  } from './add-ticket/add-ticket.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './Auth/auth.guard';
 import { HomeComponent } from './components/home/home.component';
-import { TicketsComponent } from './tickets/tickets.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

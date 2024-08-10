@@ -60,7 +60,7 @@ export class AddTicketComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.loadTicket(Number(id));
-      //this.loadComments(Number(id));
+      this.loadComments(Number(id));
     }
     this.loadUsers();
   }
@@ -70,6 +70,11 @@ export class AddTicketComponent implements OnInit {
     this.ticketService.getTicket(id).subscribe({
       next: (data) => {
         this.ticket = data;
+        this.newComment.ticketId = this.ticket.id;
+        // if(!this.ticket.comments){
+        // //this.ticket.comments = this.ticket.comments || [];
+        // this.ticket.comments = [];
+        // }
       },
       error: (error) => {
         console.log('Error loading ticket', error);
@@ -95,6 +100,7 @@ export class AddTicketComponent implements OnInit {
     this.ticketService.getCommentsByTicketId(ticketId).subscribe({
       next: (data) => {
         this.comments = data;
+        this.ticket.comments = this.comments;
       },
       error: (error) => {
         console.log('Error loading ticket', error);
@@ -169,7 +175,7 @@ export class AddTicketComponent implements OnInit {
     this.newComment.createdOn = new Date();
     this.ticketService.addComment(this.newComment).subscribe({
       next: (data) => {
-        this.comments.push(data);
+        this.ticket.comments?.push(data);
         this.newComment.commentMessage = '';  
         this.showCommentMessage = true;
         this.commentMessage = 'Comment added successfully';

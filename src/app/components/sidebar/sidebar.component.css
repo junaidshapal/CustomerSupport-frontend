@@ -1,10 +1,5 @@
-.sidebar {
-    width: 20vw; /* 1/5th of the viewport width */
-    padding-left: 0;
-  }
-  
   .project-title {
-    background-color: #f8f9fa; /* Bootstrap light background color */
+    background-color: #f8f9fa;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -33,4 +28,8 @@
 
   .logout{
     cursor: pointer;
+    margin-bottom: 4rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    text-align: center;
   }

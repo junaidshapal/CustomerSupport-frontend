@@ -2,8 +2,8 @@
 <div *ngIf="authService.isLoggedIn()">
   <app-header></app-header>
   <div class="d-flex">
-    <app-sidebar class="flex-shrink-0"></app-sidebar>
-    <div class="flex-grow-1 p-3">
+    <app-sidebar class="sidebar flex-shrink-0"></app-sidebar>
+     <div class="main-content flex-grow-1 p-3">
       <router-outlet></router-outlet>
     </div>
   </div>

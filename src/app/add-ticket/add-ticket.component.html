@@ -9,7 +9,7 @@
     {{error}}
   </div>
 
-  <h2 class = "alert alert-info">{{ ticket.id ? 'Update Ticket' : 'Add Ticket' }}</h2>
+<h2>{{ ticket.id ? 'Update: ' + ticket.title : 'Add Ticket' }}</h2>
   <form (ngSubmit)="saveTicket()">
     <div class="form-group">
       <label for="title">Title</label>
@@ -31,15 +31,35 @@
     </div>
   </form>
 
+  <div class="comment-section mt-4">
+    <h3>Comments</h3>
+    <div class="comment-list">
+      <div *ngFor="let comment of ticket.comments" class="comment-box">
+        <div class="comment-header">
+          <strong class="comment-username">{{ comment.createdBy }}</strong>
+          <span class="comment-date">{{ comment.createdOn | date:'medium' }}</span>
+        </div>
+        <div class="comment-message">
+          {{ comment.commentMessage }}
+        </div>
+        <div>
+          <a style="font-size: small; cursor: pointer; color: rgb(88, 122, 222);">Edit</a>
+          <a style="font-size: small; padding-left: 6px; cursor: pointer; color: rgb(168, 1, 1);">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
-  <div class="mt-4" *ngIf="ticket.id">
-    <h3 class="alert alert-info">Add Comment</h3>
+  <div class="add-comment-section mt-4" *ngIf="ticket.id">
     <div>
-      <textarea [(ngModel)]="newComment.commentMessage" name="commentMessage" class="form-control" placeholder="Add your comment here" required></textarea>
+      <textarea [(ngModel)]="newComment.commentMessage" name="commentMessage" class="form-control" placeholder="Add your comment here...." required></textarea>
       <div class="mt-2">
         <button type="submit" class="btn btn-primary" (click)="addComment()">Add Comment</button>
       <button type="button" class="btn btn-secondary" style="margin-left:10px;" (click)="cancel()">Cancel</button>
       </div>
     </div>
   </div>
+
+  
 </div>
