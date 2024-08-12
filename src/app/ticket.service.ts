@@ -50,4 +50,14 @@ export class TicketService {
   addComment(comment: TicketComment): Observable<TicketComment> {
     return this.http.post<TicketComment>(this.commentsUrl, comment);
   }
+
+  //Edit comment
+  updateComment(comment:TicketComment): Observable<TicketComment>{
+    return this.http.put<TicketComment>(`${this.commentsUrl}/comments/${comment.id}`,comment);
+  }
+
+  //Delete Comment
+  deleteComment(commentId:number): Observable<void> {
+    return this.http.delete<void>(`${this.commentsUrl}/${commentId}`);
+  }
 }

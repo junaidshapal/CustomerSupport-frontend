@@ -14,12 +14,14 @@ export class AuthService {
     if (username === 'admin' && password === 'abc') {
       this.loggedIn = true;
       this.userRole = 'admin';
+      localStorage.setItem('loggedInUser',JSON.stringify({username:username, password: password, role: 'admin'}));
       this.router.navigate(['/home']);
       return true;
     } 
     else if (username === 'user' && password === 'abc') {
       this.loggedIn = true;
       this.userRole = 'user';
+      localStorage.setItem('loggedInUser',JSON.stringify({username:username, password: password, role: 'user'}));
       this.router.navigate(['/tickets']);
       return true;
     } 
@@ -33,10 +35,15 @@ export class AuthService {
   logout() {
     this.loggedIn = false;
     this.userRole = null;
+    localStorage.setItem('loggedInUser','');
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
+    let loggedInUser = localStorage.getItem('loggedInUser');
+    if(loggedInUser!=undefined && loggedInUser!=null && loggedInUser!=''){
+      this.loggedIn = true;
+    }
     return this.loggedIn;
   }
 

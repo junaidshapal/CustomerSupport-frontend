@@ -9,10 +9,9 @@ import { TicketComment } from '../Model/TicketComment';
 @Component({
   selector: 'app-add-ticket',
   templateUrl: './add-ticket.component.html',
-  styleUrls: ['./add-ticket.component.css']
+  styleUrls: ['./add-ticket.component.css'],
 })
 export class AddTicketComponent implements OnInit {
-
   //Ticket Properties from API
   ticket: Ticket = {
     id: 0,
@@ -21,9 +20,8 @@ export class AddTicketComponent implements OnInit {
     createdDate: new Date(),
     createdBy: 'User',
     status: 0,
-    assignedTo:''
+    assignedTo: '',
   };
-
   //Add Comment properties from API
   newComment: TicketComment = {
     id: 0,
@@ -32,13 +30,12 @@ export class AddTicketComponent implements OnInit {
     createdBy: 'User',
     createdOn: new Date(),
     modifiedBy: '',
-    modifiedOn: new Date()
+    modifiedOn: new Date(),
   };
-
   //Array of Users
-  users:User[] = [];
+  users: User[] = [];
   comments: TicketComment[] = [];
-  
+
   //For ticket
   showSuccessMessage = false;
   successMessage = '';
@@ -48,7 +45,9 @@ export class AddTicketComponent implements OnInit {
   //For add comment
   commentMessage = '';
   showCommentMessage = false;
-  
+  //For edited Comment message
+  editedCommentMessage = '';
+  showEditCommentMessage = false;
 
   constructor(
     private ticketService: TicketService,
@@ -60,7 +59,7 @@ export class AddTicketComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.loadTicket(Number(id));
-      this.loadComments(Number(id));
+      //this.loadComments(Number(id));
     }
     this.loadUsers();
   }
@@ -71,17 +70,12 @@ export class AddTicketComponent implements OnInit {
       next: (data) => {
         this.ticket = data;
         this.newComment.ticketId = this.ticket.id;
-        // if(!this.ticket.comments){
-        // //this.ticket.comments = this.ticket.comments || [];
-        // this.ticket.comments = [];
-        // }
       },
       error: (error) => {
         console.log('Error loading ticket', error);
-      }
+      },
     });
   }
-
 
   //Method to load Users
   loadUsers(): void {
@@ -91,22 +85,22 @@ export class AddTicketComponent implements OnInit {
       },
       error: (error) => {
         console.log('Error loading ticket', error);
-      }
+      },
     });
   }
 
   //Method to load Commments
-  loadComments(ticketId: number): void {
-    this.ticketService.getCommentsByTicketId(ticketId).subscribe({
-      next: (data) => {
-        this.comments = data;
-        this.ticket.comments = this.comments;
-      },
-      error: (error) => {
-        console.log('Error loading ticket', error);
-      }
-    });
-  }
+  // loadComments(ticketId: number): void {
+  //   this.ticketService.getCommentsByTicketId(ticketId).subscribe({
+  //     next: (data) => {
+  //       this.comments = data;
+  //       this.ticket.comments = this.comments;
+  //     },
+  //     error: (error) => {
+  //       console.log('Error loading ticket', error);
+  //     },
+  //   });
+  // }
 
   //Method for save ticket in DB
   saveTicket(): void {
@@ -116,16 +110,13 @@ export class AddTicketComponent implements OnInit {
     if (!this.ticket.title && !this.ticket.description) {
       this.successMessage = 'Title and description are required!';
       this.showSuccessMessage = true;
-    } 
-    else if (!this.ticket.title) {
+    } else if (!this.ticket.title) {
       this.successMessage = 'Title is required.';
       this.showSuccessMessage = true;
-    } 
-    else if (!this.ticket.description) {
+    } else if (!this.ticket.description) {
       this.successMessage = 'Description is required.';
       this.showSuccessMessage = true;
-    }
-    else if (!this.ticket.assignedTo) {
+    } else if (!this.ticket.assignedTo) {
       this.successMessage = 'Assigned to is required.';
       this.showSuccessMessage = true;
     }
@@ -139,55 +130,61 @@ export class AddTicketComponent implements OnInit {
 
     if (this.ticket.id) {
       this.ticketService.updateTicket(this.ticket.id, this.ticket).subscribe({
-        next: () =>{
-          this.router.navigate(['/tickets'])
+        next: () => {
+          this.router.navigate(['/tickets']);
         },
-        error: (error) => console.log('Error updating ticket', error)
+        error: (error) => console.log('Error updating ticket', error),
       });
-    } 
-    else {
+    } else {
       this.ticketService.createTicket(this.ticket).subscribe({
-        next: () =>{
-          this.router.navigate(['/tickets'])
+        next: () => {
+          this.router.navigate(['/tickets']);
         },
-        error: (error) => console.log('Error creating ticket', error)
+        error: (error) => console.log('Error creating ticket', error),
       });
     }
   }
 
   //Method for Add comment
   addComment(): void {
-
     this.showError = false;
     this.error = '';
-
-    if(!this.newComment.commentMessage.trim()){
+    if (!this.newComment.commentMessage.trim()) {
       this.error = 'Please enter a valid Message';
       this.showError = true;
-
       setTimeout(() => {
         this.showError = false;
       }, 3000);
       return;
     }
 
-    this.newComment.ticketId = this.ticket.id;
-    this.newComment.createdOn = new Date();
-    this.ticketService.addComment(this.newComment).subscribe({
-      next: (data) => {
-        this.ticket.comments?.push(data);
-        this.newComment.commentMessage = '';  
-        this.showCommentMessage = true;
-        this.commentMessage = 'Comment added successfully';
-        console.log('success')
-        setTimeout(() => {
-          this.showCommentMessage = false;
-        }, 3000);
-      },
-      error: (error) => {
-        console.log('Error adding comment', error);
-      }
-    });
+   
+      this.newComment.ticketId = this.ticket.id;
+      this.newComment.createdOn = new Date();
+      this.ticketService.addComment(this.newComment).subscribe({
+        next: (data) => {
+          this.ticket.comments?.push(data);
+          this.newComment.commentMessage = '';
+          this.showCommentMessage = true;
+          this.commentMessage = 'Comment added successfully';
+          console.log('success');
+          setTimeout(() => {
+            this.showCommentMessage = false;
+          }, 3000);
+        },
+        error: (error) => {
+          console.log('Error adding comment', error);
+        },
+      });
+  }
+
+  editComment(comment: TicketComment):void{
+    console.log("edited");
+  }
+
+  //deleteComment method
+  deleteComment(commentId: number) {
+    console.log('deleted');
   }
 
   //By clicking on cancel button navigate to tickets component

@@ -42,9 +42,9 @@
         <div class="comment-message">
           {{ comment.commentMessage }}
         </div>
-        <div>
-          <a style="font-size: small; cursor: pointer; color: rgb(88, 122, 222);">Edit</a>
-          <a style="font-size: small; padding-left: 6px; cursor: pointer; color: rgb(168, 1, 1);">Delete</a>
+        <div class="comment-actions">
+          <a class="edit-link" (click)="editComment(comment)">Edit</a> 
+          <a class="delete-link" (click)="deleteComment(comment.id)">Delete</a>
         </div>
       </div>
     </div>

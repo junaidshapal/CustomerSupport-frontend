@@ -119,6 +119,27 @@ button.btn-primary:hover {
   color: #dc3545;
 }
 
-sm-btn{
-  cursor: pointer;
+/*For comment edit and delete buttons*/
+.comment-actions {
+  margin-top: 10px;
+  font-size: 0.9rem;
 }
+
+.comment-actions a {
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.comment-actions a:hover {
+  text-decoration: underline;
+}
+.comment-link {
+  text-decoration: none;
+  color: #007bff; /* Adjust color as needed */
+}
+
+.comment-link:hover {
+  text-decoration: underline;
+}
+
