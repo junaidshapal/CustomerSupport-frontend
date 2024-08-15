@@ -6,15 +6,14 @@ import { User } from './Model/User';
 import { TicketComment } from './Model/TicketComment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TicketService {
-
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private apiUrl = 'https://localhost:7077/api/Tickets';
   private usersUrl = 'https://localhost:7077/api/Users';
-  private commentsUrl ='https://localhost:7077/api/TicketComments';
+  private commentsUrl = 'https://localhost:7077/api/TicketComments';
 
   getTickets(): Observable<Ticket[]> {
     return this.http.get<Ticket[]>(this.apiUrl);
@@ -42,22 +41,25 @@ export class TicketService {
   }
 
   // Get comments by ticket ID
-  getCommentsByTicketId(ticketId: number): Observable<TicketComment[]> {
-    return this.http.get<TicketComment[]>(`${this.commentsUrl}/ticket/${ticketId}`);
-  }
-  
+  // getCommentsByTicketId(ticketId: number): Observable<TicketComment[]> {
+  //   return this.http.get<TicketComment[]>(
+  //     `${this.commentsUrl}/ticket/${ticketId}`
+  //   );
+  // }
+
   //Add Comments
   addComment(comment: TicketComment): Observable<TicketComment> {
     return this.http.post<TicketComment>(this.commentsUrl, comment);
   }
 
   //Edit comment
-  updateComment(comment:TicketComment): Observable<TicketComment>{
-    return this.http.put<TicketComment>(`${this.commentsUrl}/comments/${comment.id}`,comment);
+  updateComment(id: number, comment: TicketComment): Observable<void> {
+    return this.http.put<void>(`${this.commentsUrl}/${id}`, comment);
   }
+  
 
   //Delete Comment
-  deleteComment(commentId:number): Observable<void> {
+  deleteComment(commentId: number): Observable<void> {
     return this.http.delete<void>(`${this.commentsUrl}/${commentId}`);
   }
 }

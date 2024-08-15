@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../Model/User';
 import { error } from 'console';
 import { TicketComment } from '../Model/TicketComment';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-add-ticket',
@@ -49,10 +51,13 @@ export class AddTicketComponent implements OnInit {
   editedCommentMessage = '';
   showEditCommentMessage = false;
 
+  isEditingComment: boolean = false;
+
   constructor(
     private ticketService: TicketService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -145,12 +150,13 @@ export class AddTicketComponent implements OnInit {
     }
   }
 
-  //Method for Add comment
-  addComment(): void {
+  
+  //AddorEdit Comment
+  addOrUpdateComment(): void {
     this.showError = false;
     this.error = '';
     if (!this.newComment.commentMessage.trim()) {
-      this.error = 'Please enter a valid Message';
+      this.error = 'Please enter a valid message';
       this.showError = true;
       setTimeout(() => {
         this.showError = false;
@@ -158,37 +164,101 @@ export class AddTicketComponent implements OnInit {
       return;
     }
 
-   
-      this.newComment.ticketId = this.ticket.id;
-      this.newComment.createdOn = new Date();
-      this.ticketService.addComment(this.newComment).subscribe({
-        next: (data) => {
-          this.ticket.comments?.push(data);
-          this.newComment.commentMessage = '';
-          this.showCommentMessage = true;
-          this.commentMessage = 'Comment added successfully';
-          console.log('success');
-          setTimeout(() => {
-            this.showCommentMessage = false;
-          }, 3000);
-        },
-        error: (error) => {
-          console.log('Error adding comment', error);
-        },
-      });
+    if (this.isEditingComment) {
+      this.updateComment();
+    } else {
+      this.addComment();
+    }
   }
 
-  editComment(comment: TicketComment):void{
-    console.log("edited");
+  addComment(): void {
+    this.newComment.ticketId = this.ticket.id;
+    this.newComment.createdOn = new Date();
+
+    this.ticketService.addComment(this.newComment).subscribe({
+      next: (data) => {
+        this.comments.push(data);
+        this.resetCommentForm();
+        this.showCommentMessage = true;
+        this.commentMessage = 'Comment added successfully';
+        setTimeout(() => {
+          this.showCommentMessage = false;
+        }, 3000);
+      },
+      error: (error) => {
+        console.log('Error adding comment', error);
+      },
+    });
   }
+
+  editComment(comment: TicketComment): void {
+    this.newComment = { ...comment };
+    this.isEditingComment = true;
+  }
+
+  updateComment(): void {
+    this.ticketService.updateComment(this.newComment.id, this.newComment).subscribe({
+      next: () => {
+        //Find the index of the comment in the comments array
+        const index = this.comments.findIndex(c => c.id === this.newComment.id);
+        if (index !== -1) {
+          //Update the comment in the array
+          this.comments[index] = { ...this.newComment };
+          this.comments = [...this.comments];
+        }
+        
+        //Reset the form
+        this.resetCommentForm();
+        this.isEditingComment = false;
+  
+        //Show success message
+        this.showEditCommentMessage = true;
+        this.editedCommentMessage = 'Comment updated successfully';
+        setTimeout(() => {
+          this.showEditCommentMessage = false;
+        }, 3000);
+      },
+      error: (error) => {
+        console.log('Error updating comment', error);
+      }
+    });
+  }
+  
+
 
   //deleteComment method
-  deleteComment(commentId: number) {
-    console.log('deleted');
+  deleteComment(commentId: number): void {
+    this.ticketService.deleteComment(commentId).subscribe({
+      next: () => {
+        this.comments = this.comments.filter(comment => comment.id !== commentId);
+        this.showCommentMessage = true;
+        this.commentMessage = 'Comment deleted successfully';
+        setTimeout(() => {
+          this.showCommentMessage = false;
+        }, 3000);
+      },
+      error: (error) => {
+        console.log('Error deleting comment', error);
+      }
+    });
   }
 
   //By clicking on cancel button navigate to tickets component
   cancel(): void {
     this.router.navigate(['/tickets']);
+  }
+
+  //Reset comment form after adding or updateing comment
+  resetCommentForm(): void {
+    this.newComment = {
+      id: 0,
+      ticketId: this.ticket.id,
+      commentMessage: '',
+      createdBy: '',
+      createdOn: new Date(),
+      modifiedBy: '',
+      modifiedOn: new Date()
+    };
+    this.isEditingComment = false; 
   }
 }

@@ -55,7 +55,10 @@
     <div>
       <textarea [(ngModel)]="newComment.commentMessage" name="commentMessage" class="form-control" placeholder="Add your comment here...." required></textarea>
       <div class="mt-2">
-        <button type="submit" class="btn btn-primary" (click)="addComment()">Add Comment</button>
+        <button (click)="addOrUpdateComment()" 
+        type="submit" 
+        class="btn btn-primary" 
+        >{{isEditingComment ? 'Update': 'Save'}}</button>
       <button type="button" class="btn btn-secondary" style="margin-left:10px;" (click)="cancel()">Cancel</button>
       </div>
     </div>
