@@ -1,4 +1,4 @@
-Angular frontend of CustomerSupport API.
+Frontend of CustomerSupport API.
 
 # CustomerSupportApp
 
