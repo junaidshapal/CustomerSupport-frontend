@@ -1,4 +1,4 @@
-Frontend of CustomerSupport API.
+Frontend of CustomerSupport.
 
 # CustomerSupportApp
 
