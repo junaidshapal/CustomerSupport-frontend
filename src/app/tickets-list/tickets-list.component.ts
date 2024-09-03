@@ -9,10 +9,13 @@ import { TicketService } from '../ticket.service';
 })
 export class TicketsListComponent implements OnInit {
   tickets: Ticket[] = [];
-
   showErrorMessage = false;
   successMessage = '';
-  
+
+  //for search ticket 
+  searchTerm:string = '';
+  filteredTickets:Ticket[] = [];
+
   constructor(private ticketService: TicketService) { }
 
   ngOnInit(): void {
@@ -23,11 +26,26 @@ export class TicketsListComponent implements OnInit {
     this.ticketService.getTickets().subscribe({
       next: (data) => {
         this.tickets = data;
+        this.filteredTickets = data;
       },
       error: (error) => {
         console.log('Error loading tickets', error);
       }
     });
+  }
+
+  //Search tickets method
+  searchTickets():void{
+    if(this.searchTerm.trim()){
+      debugger
+      this.filteredTickets = this.tickets.filter(ticket => 
+        ticket.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+    else{
+      console.log("error");
+      this.filteredTickets = [...this.tickets];
+    }
   }
 
   deleteTicket(id: number): void {

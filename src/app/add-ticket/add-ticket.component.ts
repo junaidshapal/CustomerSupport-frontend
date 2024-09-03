@@ -24,6 +24,7 @@ export class AddTicketComponent implements OnInit {
     status: 0,
     assignedTo: '',
   };
+
   //Add Comment properties from API
   newComment: TicketComment = {
     id: 0,
@@ -34,6 +35,7 @@ export class AddTicketComponent implements OnInit {
     modifiedBy: '',
     modifiedOn: new Date(),
   };
+
   //Array of Users
   users: User[] = [];
   comments: TicketComment[] = [];
@@ -41,16 +43,18 @@ export class AddTicketComponent implements OnInit {
   //For ticket
   showSuccessMessage = false;
   successMessage = '';
+
   //For comment required
   showError = false;
   error = '';
+
   //For add comment
   commentMessage = '';
   showCommentMessage = false;
+
   //For edited Comment message
   editedCommentMessage = '';
   showEditCommentMessage = false;
-
   isEditingComment: boolean = false;
 
   constructor(

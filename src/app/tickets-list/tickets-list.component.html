@@ -3,7 +3,14 @@
     {{successMessage}}
   </div>
     <h2>Tickets</h2>
-    <button routerLink="/tickets/new" class="btn btn-primary mb-3">New Ticket</button>
+
+    <div class="search-container">
+      <button routerLink="/tickets/new" class="btn btn-primary new-ticket-button">New Ticket</button>
+      <div class="search-box">
+        <input type="text" [(ngModel)]="searchTerm" (input)="searchTickets()" placeholder="Search" />
+      </div>
+    </div>
+
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -17,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ticket of tickets">
+        <tr *ngFor="let ticket of filteredTickets">
           <td>{{ ticket.id }}</td>
           <td>{{ ticket.title }}</td>
           <td>{{ ticket.createdBy }}</td>

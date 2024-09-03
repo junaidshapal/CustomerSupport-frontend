@@ -35,6 +35,11 @@ export class TicketService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  //SerarchTickets by name
+  searchTickets(name: string):Observable<Ticket[]>{
+    return this.http.get<Ticket[]>(`${this.apiUrl}/Search?name = ${name}`);
+  }
+
   //Get users
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl);

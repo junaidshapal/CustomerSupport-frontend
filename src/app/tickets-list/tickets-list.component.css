@@ -25,3 +25,39 @@
     z-index: 1000;
   }
   
+
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  
+  .search-container .search-box {
+    width: 25%;
+    position: relative;
+  }
+  
+  .search-container input[type="text"] {
+    width: 100%;
+    padding: 8px 15px;
+    font-size: 16px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    outline: none;
+  }
+  
+  .search-container input[type="text"]:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  }
+  
+  .search-container input[type="text"]::placeholder {
+    color: #999;
+  }
+  
+  .search-container input[type="text"]:hover {
+    border-color: #0056b3;
+  }
+  
