@@ -3,7 +3,7 @@ import { Ticket } from '../Model/Ticket';
 import { TicketService } from '../ticket.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../Model/User';
-import { error } from 'console';
+import { Console, error } from 'console';
 import { TicketComment } from '../Model/TicketComment';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -21,9 +21,11 @@ export class AddTicketComponent implements OnInit {
     description: '',
     createdDate: new Date(),
     createdBy: 'User',
-    status: 0,
+    status:1,
     assignedTo: '',
   };
+
+
 
   //Add Comment properties from API
   newComment: TicketComment = {
@@ -54,9 +56,10 @@ export class AddTicketComponent implements OnInit {
 
   //For edited Comment message
   editedCommentMessage = '';
-  showEditCommentMessage = false;
+  showEditCommentMessage = false;       
   isEditingComment: boolean = false;
 
+  
   constructor(
     private ticketService: TicketService,
     private route: ActivatedRoute,
@@ -66,7 +69,7 @@ export class AddTicketComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+    if (id && !isNaN(Number(id))) {
       this.loadTicket(Number(id));
       //this.loadComments(Number(id));
     }
@@ -75,15 +78,21 @@ export class AddTicketComponent implements OnInit {
 
   //Method to mload Tickets
   loadTicket(id: number): void {
-    this.ticketService.getTicket(id).subscribe({
-      next: (data) => {
-        this.ticket = data;
-        this.newComment.ticketId = this.ticket.id;
-      },
-      error: (error) => {
-        console.log('Error loading ticket', error);
-      },
-    });
+    if(id && id > 0){
+      this.ticketService.getTicket(id).subscribe({
+        next: (data) => {
+          this.ticket = data;
+          this.newComment.ticketId = this.ticket.id;
+        },
+        error: (error) => {
+          console.log('Error loading ticket', error);
+        },
+      });
+    }
+    else{
+      console.log('Invalid');
+    }
+    
   }
 
   //Method to load Users
@@ -140,16 +149,19 @@ export class AddTicketComponent implements OnInit {
     if (this.ticket.id) {
       this.ticketService.updateTicket(this.ticket.id, this.ticket).subscribe({
         next: () => {
+          console.log("y")
           this.router.navigate(['/tickets']);
         },
-        error: (error) => console.log('Error updating ticket', error),
+        error: (error) => 
+          console.log('Error updating ticket', error), 
       });
     } else {
-      this.ticketService.createTicket(this.ticket).subscribe({
+        this.ticketService.createTicket(this.ticket).subscribe({
         next: () => {
           this.router.navigate(['/tickets']);
         },
-        error: (error) => console.log('Error creating ticket', error),
+        error: (error) => 
+          console.log('Error creating ticket', error),
       });
     }
   }
