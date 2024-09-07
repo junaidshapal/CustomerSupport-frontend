@@ -9,6 +9,9 @@ import { TicketComment } from './Model/TicketComment';
   providedIn: 'root',
 })
 export class TicketService {
+  getCommentsByTicketId(ticketId: number) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private http: HttpClient) {}
 
   private apiUrl = 'https://localhost:7077/api/Tickets';

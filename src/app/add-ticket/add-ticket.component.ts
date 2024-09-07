@@ -76,7 +76,8 @@ export class AddTicketComponent implements OnInit {
     this.loadUsers();
   }
 
-  //Method to mload Tickets
+    
+  //Method to load Tickets
   loadTicket(id: number): void {
     if(id && id > 0){
       this.ticketService.getTicket(id).subscribe({
@@ -200,6 +201,7 @@ export class AddTicketComponent implements OnInit {
         setTimeout(() => {
           this.showCommentMessage = false;
         }, 3000);
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.log('Error adding comment', error);
@@ -233,6 +235,8 @@ export class AddTicketComponent implements OnInit {
         setTimeout(() => {
           this.showEditCommentMessage = false;
         }, 3000);
+
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.log('Error updating comment', error);
@@ -252,6 +256,7 @@ export class AddTicketComponent implements OnInit {
         setTimeout(() => {
           this.showCommentMessage = false;
         }, 3000);
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.log('Error deleting comment', error);

@@ -22,18 +22,21 @@
     <div class="mt-2">
       <label for="assignedTo">Assigned To</label>
       <select id="assignedTo" class="form-select" [(ngModel)]="ticket.assignedTo" name="assignedTo" required>
-        <option *ngFor="let user of users" [value]="user.userId" selected>{{user.fullName}}</option>
+        <option *ngFor="let user of   users" [value]="user.userId" selected>{{user.fullName}}</option>
       </select>
     </div>
 
+    <div class="mt-2">
+      <label for="status">Status</label>
+      <select class="form-select" [(ngModel)]="ticket.status" name="status" required>
+        <option [value]="0">Unknown</option>
+        <option [value]="1">In Progress</option>
+        <option [value]="2">Completed</option>
+        <option [value]="3">Failed</option>
+        <option [value]="4">Blocked</option>
+      </select>
+    </div>
     
-    <select [(ngModel)]="ticket.status" name="status" required>
-      <option [value]="0">Unknown</option>
-      <option [value]="1">In Progress</option>
-      <option [value]="2">Completed</option>
-      <option [value]="3">Failed</option>
-      <option [value]="4">Blocked</option>
-    </select>
     
     <div class="mt-2">
       <button type="submit" class="btn btn-primary">{{ ticket.id ? 'Update' : 'Save' }}</button>
