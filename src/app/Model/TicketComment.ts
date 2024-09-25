@@ -1,3 +1,5 @@
+
+//Class for ticketComment
 export interface TicketComment{
     id: number;
     ticketId: number;
