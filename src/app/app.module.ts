@@ -14,6 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClient } from '@angular/common/http';
+import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 
 
 
@@ -27,7 +28,8 @@ import { HttpClient } from '@angular/common/http';
     SidebarComponent,
     HeaderComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TicketDetailsComponent
   ],
   imports: [
     BrowserModule,

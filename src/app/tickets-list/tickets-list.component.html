@@ -33,8 +33,9 @@
           <td>{{ ticket.status }}</td>
           <td>
             <div>
-                <button [routerLink]="['/tickets', ticket.id]" class="btn btn-sm btn-info">Edit</button>
-                <button (click)="deleteTicket(ticket.id)" style="margin-left:10px;" class="btn btn-sm btn-danger">Delete</button>
+              <button [routerLink]="['/tickets/ticket-details', ticket.id]" class="btn btn-sm btn-success">Details</button>
+              <button [routerLink]="['/tickets', ticket.id]" style="margin-left:10px;" class="btn btn-sm btn-info">Edit</button>
+              <button (click)="deleteTicket(ticket.id)" style="margin-left:10px;" class="btn btn-sm btn-danger">Delete</button>
             </div>
           </td>
         </tr>

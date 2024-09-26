@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ticket } from '../Model/Ticket';
 import { TicketService } from '../ticket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tickets-list',
@@ -16,10 +17,14 @@ export class TicketsListComponent implements OnInit {
   searchTerm:string = '';
   filteredTickets:Ticket[] = [];
 
-  constructor(private ticketService: TicketService) { }
+  constructor(private router: Router, private ticketService: TicketService) { }
 
   ngOnInit(): void {
     this.loadTickets();
+  }
+
+  viewDetails(ticketId: number):void{
+    this.router.navigate(['/ticket-details', ticketId]);
   }
 
   loadTickets(): void {

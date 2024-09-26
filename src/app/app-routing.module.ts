@@ -6,6 +6,18 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './Auth/auth.guard';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
+
+// const routes: Routes = [
+//   { path: 'login', component: LoginComponent },
+//   { path: 'register', component: RegisterComponent },
+//   { path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
+//   { path: 'tickets', component: TicketsListComponent, canActivate: [AuthGuard] },
+//   { path: 'tickets/:id', component: AddTicketComponent , canActivate: [AuthGuard] },
+//   { path: 'tickets/:id', component: TicketDetailsComponent },
+//   { path: '', redirectTo: '/login', pathMatch: 'full' }
+// ];
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +25,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
   { path: 'tickets', component: TicketsListComponent, canActivate: [AuthGuard] },
   { path: 'tickets/:id', component: AddTicketComponent , canActivate: [AuthGuard] },
+  { path: 'tickets/ticket-details/:id', component: TicketDetailsComponent }, // For ticket details
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
