@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Ticket } from '../Model/Ticket';
 import { TicketService } from '../ticket.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-tickets-list',
@@ -13,19 +15,28 @@ export class TicketsListComponent implements OnInit {
   showErrorMessage = false;
   successMessage = '';
 
+  //selected tickets
+  selectedTicket?: Ticket;
+
   //for search ticket 
   searchTerm:string = '';
   filteredTickets:Ticket[] = [];
 
-  constructor(private router: Router, private ticketService: TicketService) { }
+  constructor(private router: Router, private modalService: NgbModal, private ticketService: TicketService) { }
 
   ngOnInit(): void {
     this.loadTickets();
   }
 
-  viewDetails(ticketId: number):void{
-    this.router.navigate(['/ticket-details', ticketId]);
+  //Modal for ticketDetails
+  openDetailsModal(content: TemplateRef<any>, ticket: Ticket): void {
+    this.selectedTicket = ticket;
+    this.modalService.open(content, { ariaLabelledBy: 'ticketDetailsModalLabel' });
   }
+
+  // viewDetails(ticketId: number):void{
+  //   this.router.navigate(['/ticket-details', ticketId]);
+  // }
 
   loadTickets(): void {
     this.ticketService.getTickets().subscribe({

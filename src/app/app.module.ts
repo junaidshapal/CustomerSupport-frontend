@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpClient } from '@angular/common/http';
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -37,6 +38,7 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [
     provideClientHydration()
