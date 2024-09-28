@@ -43,24 +43,7 @@
 
 
 
-    <ng-template #detailsModal let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title" id="ticketDetailsModalLabel">Ticket Details</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Id:</strong> {{ selectedTicket?.id }}</p>
-        <p><strong>Title:</strong> {{ selectedTicket?.title }}</p>
-        <p><strong>Description:</strong> {{ selectedTicket?.description }}</p>
-        <p><strong>Created By:</strong> {{ selectedTicket?.createdBy }}</p>
-        <p><strong>Created Date:</strong> {{ selectedTicket?.createdDate | date }}</p>
-        <p><strong>Assigned To:</strong> {{ selectedTicket?.assignedTo }}</p>
-        <p><strong>Status:</strong> {{ selectedTicket?.status }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
-      </div>
-    </ng-template>
+    
   </div>
   
 
