@@ -4,6 +4,18 @@
   </div>
     <h2>Tickets</h2>
 
+    <!--Dropdown for entries to show-->
+    <div class="btn-group" style="margin-top: 20px;">
+      <label for="entries" style="margin-right: 10px;">
+       <b>Show entries:</b>
+      </label>
+    
+      <select id="entries" class="form-select form-select-sm" [(ngModel)]="entriesToShow" (change)="onEntriesChange($event)" style="width: auto;">
+        <option *ngFor="let option of entriesOptions" [value]="option">{{option}}</option>
+      </select>
+    </div>
+    
+
     <div class="search-container">
       <button routerLink="/tickets/new" class="btn btn-primary new-ticket-button">New Ticket</button>
       <div class="search-box">
@@ -23,23 +35,33 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ticket of filteredTickets">
+        <tr *ngFor="let ticket of paginatedTickets">
           <td>{{ ticket.id }}</td>
           <td>{{ ticket.title }}</td>
           <td>{{ ticket.createdBy }}</td>
           <td>{{ ticket.createdDate | date }}</td> 
           <td>{{ ticket.status }}</td>
-          <td>
-            <div>
-              <button (click)="openDetailsModal(detailsModal, ticket)" style="margin-left:10px;" class="btn btn-sm btn-success">Details</button>
-              <!-- <button [routerLink]="['/tickets/ticket-details', ticket.id]" class="btn btn-sm btn-success">Details</button> -->
-              <button [routerLink]="['/tickets', ticket.id]" style="margin-left:10px;" class="btn btn-sm btn-info">Edit</button>
-              <button (click)="deleteTicket(ticket.id)" style="margin-left:10px;" class="btn btn-sm btn-danger">Delete</button>
-            </div>
-          </td>
+          
         </tr>
       </tbody>
     </table>
+
+
+    <!--Next previous (Paginated controls)-->
+    <div class="pagination-controls text-center" style="margin-top: 20px;">
+      <button (click)="previousPage()" class="btn btn-secondary btn-sm" [disabled]="currentPage === 1" style="margin-right: 10px;">
+        <i class="bi bi-arrow-left"></i> 
+      </button>
+    
+      <span class="page-info" style="font-size: 16px; margin: 0 15px;">
+        Page {{currentPage}} of {{totalPages}}
+      </span>
+    
+      <button (click)="nextPage()" class="btn btn-secondary btn-sm" [disabled]="currentPage === totalPages" style="margin-left: 10px;">
+         <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+    
 
 
 
