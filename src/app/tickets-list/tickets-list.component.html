@@ -41,7 +41,20 @@
           <td>{{ ticket.createdBy }}</td>
           <td>{{ ticket.createdDate | date }}</td> 
           <td>{{ ticket.status }}</td>
-          
+          <td>
+            <div>
+              <button (click)="openDetailsModal(detailsModal, ticket)" style="margin-left:10px;" class="btn btn-sm btn-success">
+                <i class="bi bi-eye"></i>
+              </button>
+              <!-- <button [routerLink]="['/tickets/ticket-details', ticket.id]" class="btn btn-sm btn-success">Details</button> -->
+              <button [routerLink]="['/tickets', ticket.id]" style="margin-left:10px;" class="btn btn-sm btn-info">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button (click)="deleteTicket(ticket.id)" style="margin-left:10px;" class="btn btn-sm btn-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
