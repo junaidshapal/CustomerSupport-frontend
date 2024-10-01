@@ -6,7 +6,7 @@
 
     <!--Dropdown for entries to show-->
     <div class="btn-group" style="margin-top: 20px;">
-      <label for="entries" style="margin-right: 10px;">
+      <label class="txt" for="entries" style="margin-right: 10px;">
        <b>Show entries:</b>
       </label>
     
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>Id</th>
@@ -66,8 +66,8 @@
         <i class="bi bi-arrow-left"></i> 
       </button>
     
-      <span class="page-info" style="font-size: 16px; margin: 0 15px;">
-        Page {{currentPage}} of {{totalPages}}
+      <span class="page-info txt" style="font-size: 16px; margin: 0 15px;">
+        <b>Page {{currentPage}} of {{totalPages}}</b>
       </span>
     
       <button (click)="nextPage()" class="btn btn-secondary btn-sm" [disabled]="currentPage === totalPages" style="margin-left: 10px;">
