@@ -8,17 +8,6 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 
-// const routes: Routes = [
-//   { path: 'login', component: LoginComponent },
-//   { path: 'register', component: RegisterComponent },
-//   { path: 'home', component: HomeComponent, canActivate: [AuthGuard], data: { roles: ['admin'] } },
-//   { path: 'tickets', component: TicketsListComponent, canActivate: [AuthGuard] },
-//   { path: 'tickets/:id', component: AddTicketComponent , canActivate: [AuthGuard] },
-//   { path: 'tickets/:id', component: TicketDetailsComponent },
-//   { path: '', redirectTo: '/login', pathMatch: 'full' }
-// ];
-
-
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch:'full'},
   { path: 'login', component: LoginComponent },

@@ -71,7 +71,7 @@ login() {
   this.authService.login(this.loginData).subscribe({
     next: (response) => {
       if (this.authService.isAuthenticated()) {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['home']);
       }
     },
     error: (err) => {
