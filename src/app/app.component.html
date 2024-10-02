@@ -1,5 +1,5 @@
-<router-outlet *ngIf="!authService.isLoggedIn()"></router-outlet>
-<div *ngIf="authService.isLoggedIn()">
+<router-outlet></router-outlet>
+<div >
   <app-header></app-header>
   <div class="d-flex">
     <app-sidebar class="sidebar flex-shrink-0"></app-sidebar>
