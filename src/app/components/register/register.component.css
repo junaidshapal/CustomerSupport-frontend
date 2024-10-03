@@ -1,88 +1,90 @@
-
-html, body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f2f5;
-  }
-  
-  body {
-    width: 80vw;
+.body {
+  font-family: "Lato", sans-serif;
 }
 
-  .register-form {
-    width: 350px;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid #cccccc;
-    
+.main-head {
+  height: 150px;
+  background: #FFF;
+}
+
+.sidenav {
+  height: 100%;
+  background-color: #000000;
+  overflow-x: hidden;
+  padding-top: 20px;
+  position: fixed;
+  width: 37%;
+  top: 0;
+  left: 0;
+}
+
+.main {
+  margin-left: 40%;
+  padding: 0px 10px;
+  position: relative;
+}
+
+.login-main-text {
+  margin-top: 20%;
+  padding: 60px;
+  color: #fff;
+}
+
+.login-main-text h2 {
+  font-weight: 300;
+}
+
+.btn-black {
+  background-color: #000000 !important;
+  color: #fff;
+  width: 15%;
+}
+
+.login-form {
+  position: fixed;
+  top: 70%;
+  left: 40%;
+  transform: translateY(-50%);
+  width: 30%;
+}
+.form{
+  width: 50%;
+}
+
+button:hover{
+  opacity: 1rem;
+  color: aliceblue;
+}
+
+
+/*For error msg*/
+.alert {
+  transition: opacity 0.5s linear;
+}
+
+.alert-fade-out {
+  animation: fadeOut 2.5s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
   }
-  
-  /* Form fields */
-  .form-group label {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+  100% {
+      opacity: 0;
   }
-  
-  .form-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    margin-bottom: 1rem; 
-  }
-  
-  /* Error messages */
-  .form-group small {
-    color: red;
-    font-size: 0.8rem;
-  }
-  
-  /* Submit button */
-  .btn-primary {
-    width: 100%;
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-  
-  
-  a {
-    display: block;
-    text-align: center;
-    margin-top: 1rem;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Responsive adjustments for smaller screens */
-  @media (max-width: 768px) {
-    .register-form {
-        width: 50%;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .register-form {
-        width: 80%;
-    }
-  }
-  
+}
+
+
+
+a {
+  color: #007bff; /* Default link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make the link bold */
+  margin-top: 10px; /* Add space above the link */
+}
+
+a:hover {
+  color: #0056b3; /* Change color on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
