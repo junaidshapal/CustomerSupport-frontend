@@ -8,6 +8,13 @@ html, body {
     background-color: #f0f2f5;
   }
   
+  body {
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
   .register-form {
     width: 350px;
     padding: 2rem;
