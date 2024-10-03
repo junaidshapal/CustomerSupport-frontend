@@ -10,9 +10,6 @@ html, body {
   
   body {
     width: 80vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
   .register-form {

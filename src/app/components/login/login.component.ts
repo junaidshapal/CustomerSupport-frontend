@@ -61,7 +61,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  showErrorMessage = false;
+  errorMessage = '';
   
   loginData = { UserName: '', Password: '' };
 

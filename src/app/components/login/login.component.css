@@ -13,7 +13,7 @@
     overflow-x: hidden;
     padding-top: 20px;
     position: fixed;
-    width: 38%;
+    width: 37%;
     top: 0;
     left: 0;
 }
@@ -37,7 +37,7 @@
 .btn-black {
     background-color: #000000 !important;
     color: #fff;
-    width: 50%;
+    width: 15%;
 }
 
 .login-form {
@@ -45,7 +45,7 @@
     top: 70%;
     left: 40%;
     transform: translateY(-50%);
-    width: 50%;
+    width: 30%;
 }
 .form{
     width: 50%;
@@ -77,4 +77,14 @@ button:hover{
 
 
 
-/*New form css*/
+a {
+    color: #007bff; /* Default link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make the link bold */
+    margin-top: 10px; /* Add space above the link */
+}
+
+a:hover {
+    color: #0056b3; /* Change color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
