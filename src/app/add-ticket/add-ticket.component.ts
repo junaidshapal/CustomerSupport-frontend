@@ -39,7 +39,7 @@ export class AddTicketComponent implements OnInit {
   };
 
   //Array of Users
-  users: User[] = [];
+  //users: User[] = [];
   comments: TicketComment[] = [];
 
   //For ticket
@@ -73,7 +73,7 @@ export class AddTicketComponent implements OnInit {
       this.loadTicket(Number(id));
       //this.loadComments(Number(id));
     }
-    this.loadUsers();
+   // this.loadUsers();
   }
 
     
@@ -97,16 +97,16 @@ export class AddTicketComponent implements OnInit {
   }
 
   //Method to load Users
-  loadUsers(): void {
-    this.ticketService.getUsers().subscribe({
-      next: (data) => {
-        this.users = data;
-      },
-      error: (error) => {
-        console.log('Error loading ticket', error);
-      },
-    });
-  }
+  // loadUsers(): void {
+  //   this.ticketService.getUsers().subscribe({
+  //     next: (data) => {
+  //       this.users = data;
+  //     },
+  //     error: (error) => {
+  //       console.log('Error loading ticket', error);
+  //     },
+  //   });
+  // }
 
   //Method to load Commments
   // loadComments(ticketId: number): void {
@@ -135,10 +135,10 @@ export class AddTicketComponent implements OnInit {
     } else if (!this.ticket.description) {
       this.successMessage = 'Description is required.';
       this.showSuccessMessage = true;
-    } else if (!this.ticket.assignedTo) {
-      this.successMessage = 'Assigned to is required.';
-      this.showSuccessMessage = true;
-    }
+    } //else if (!this.ticket.assignedTo) {
+    //   this.successMessage = 'Assigned to is required.';
+    //   this.showSuccessMessage = true;
+    // }
 
     if (this.showSuccessMessage) {
       setTimeout(() => {

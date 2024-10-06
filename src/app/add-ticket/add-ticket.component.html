@@ -19,12 +19,12 @@
       <label for="description">Description</label>
       <textarea class="form-control" id="description" [(ngModel)]="ticket.description" name="description" required></textarea>
     </div>
-    <div class="mt-2">
+    <!-- <div class="mt-2">
       <label for="assignedTo">Assigned To</label>
       <select id="assignedTo" class="form-select" [(ngModel)]="ticket.assignedTo" name="assignedTo" required>
         <option *ngFor="let user of   users" [value]="user.userId" selected>{{user.fullName}}</option>
       </select>
-    </div>
+    </div> -->
 
     <div class="mt-2">
       <label for="status">Status</label>

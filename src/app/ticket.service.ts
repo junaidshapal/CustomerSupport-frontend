@@ -15,7 +15,7 @@ export class TicketService {
   constructor(private http: HttpClient) {}
 
   private apiUrl = 'https://localhost:7077/api/Tickets';
-  private usersUrl = 'https://localhost:7077/api/Users';
+  //private usersUrl = 'https://localhost:7077/api/Users';
   private commentsUrl = 'https://localhost:7077/api/TicketComments';
 
   getTickets(): Observable<Ticket[]> {
@@ -46,9 +46,9 @@ export class TicketService {
   }
 
   //Get users
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl);
-  }
+  // getUsers(): Observable<User[]> {
+  //   return this.http.get<User[]>(this.usersUrl);
+  // }
 
   // Get comments by ticket ID
   // getCommentsByTicketId(ticketId: number): Observable<TicketComment[]> {

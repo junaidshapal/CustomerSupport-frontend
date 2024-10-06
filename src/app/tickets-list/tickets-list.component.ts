@@ -117,7 +117,7 @@ export class TicketsListComponent implements OnInit {
         ticket.title.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {
-      console.log("error");
+      console.log("Invalid search term");
       this.updatePagination();
     }
   }
