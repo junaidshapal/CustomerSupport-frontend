@@ -3,6 +3,7 @@ import { Ticket } from '../Model/Ticket';
 import { TicketService } from '../ticket.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../Services/auth.service';
 
 
 @Component({
@@ -30,20 +31,43 @@ export class TicketsListComponent implements OnInit {
   searchTerm:string = '';
   filteredTickets:Ticket[] = [];
 
-  constructor(private router: Router, private modalService: NgbModal, private ticketService: TicketService) { }
+  //Roles
+  isAdmin: boolean = false;
+  isCustomer: boolean = false;
+  
+  //var message for tickets to show
+  message = '';
+
+  constructor(private router: Router, 
+    private modalService: NgbModal,
+    private ticketService: TicketService,
+    private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.isAdmin =  this.authService.getRole() === "Admin";
+    this.isCustomer =  this.authService.getRole() === "Customer";
     this.loadTickets();
   }
 
   
 
   loadTickets(): void {
+    if(this.authService.getRole() === 'Admin'){
+      console.log("All tickets loading");
+    }
+    else{
+      console.log("Only customer tickets");
+    }
     this.ticketService.getTickets().subscribe({
       next: (data) => {
         this.tickets = data;
         this.filteredTickets = data;
         this.updatePagination();
+
+        if(this.isCustomer && this.tickets.length === 0){
+          this.message = 'No tickets created';
+        }
+
       },
       error: (error) => {
         console.log('Error loading tickets', error);

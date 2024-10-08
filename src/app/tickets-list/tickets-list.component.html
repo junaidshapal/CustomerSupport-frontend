@@ -1,34 +1,72 @@
 <div class="container">
-  <div *ngIf="showErrorMessage" [ngClass]="{'fade-out':showErrorMessage}" class="success-message">
-    {{successMessage}}
+  <div *ngIf="showErrorMessage" [ngClass]="{'fade-out': showErrorMessage}" class="success-message">
+    {{ successMessage }}
   </div>
-    <h2>Tickets</h2>
 
-    <!--Dropdown for entries to show-->
-    <div class="btn-group" style="margin-top: 20px;">
-      <label class="txt" for="entries" style="margin-right: 10px;">
-       <b>Show entries:</b>
-      </label>
-    
-      <select id="entries" class="form-select form-select-sm" [(ngModel)]="entriesToShow" (change)="onEntriesChange($event)" style="width: auto;">
-        <option *ngFor="let option of entriesOptions" [value]="option">{{option}}</option>
-      </select>
+  <h2>Tickets</h2>
+
+  <!-- Dropdown for entries to show -->
+  <div class="btn-group" style="margin-top: 20px;" *ngIf="isAdmin">
+    <label class="txt" for="entries" style="margin-right: 10px;">
+      <b>Show entries:</b>
+    </label>
+
+    <select id="entries" class="form-select form-select-sm" [(ngModel)]="entriesToShow" (change)="onEntriesChange($event)" style="width: auto;">
+      <option *ngFor="let option of entriesOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+
+  <!-- Add Ticket Button (Visible for both Admin and Customer) -->
+  <div class="search-container">
+    <button *ngIf="isAdmin || isCustomer" routerLink="/tickets/new" class="btn btn-primary new-ticket-button">New Ticket</button>
+    <div class="search-box" *ngIf="isAdmin">
+      <input type="text" [(ngModel)]="searchTerm" (input)="searchTickets()" placeholder="Search" />
     </div>
-    
+  </div>
 
-    <div class="search-container">
-      <button routerLink="/tickets/new" class="btn btn-primary new-ticket-button">New Ticket</button>
-      <div class="search-box">
-        <input type="text" [(ngModel)]="searchTerm" (input)="searchTickets()" placeholder="Search" />
-      </div>
-    </div>
+  <!-- Ticket List for Admin -->
+  <table class="table table-bordered table-hover" *ngIf="isAdmin && tickets.length > 0">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Created By</th>
+        <th>Created Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of paginatedTickets">
+        <td>{{ ticket.id }}</td>
+        <td>{{ ticket.title }}</td>
+        <td>{{ ticket.createdBy }}</td>
+        <td>{{ ticket.createdDate | date }}</td>
+        <td>{{ ticket.status }}</td>
+        <td>
+          <div>
+            <button (click)="openDetailsModal(detailsModal, ticket)" style="margin-left:10px;" class="btn btn-sm btn-success">
+              <i class="bi bi-eye"></i>
+            </button>
+            <button [routerLink]="['/tickets', ticket.id]" style="margin-left:10px;" class="btn btn-sm btn-info">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button (click)="deleteTicket(ticket.id)" style="margin-left:10px;" class="btn btn-sm btn-danger">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-    <table class="table table-bordered table-hover">
+  <!-- Ticket List for Customer -->
+  <div *ngIf="isCustomer">
+    <table *ngIf="tickets.length > 0" class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>Id</th>
           <th>Title</th>
-          <th>Created By</th>
           <th>Created Date</th>
           <th>Status</th>
           <th>Actions</th>
@@ -38,20 +76,15 @@
         <tr *ngFor="let ticket of paginatedTickets">
           <td>{{ ticket.id }}</td>
           <td>{{ ticket.title }}</td>
-          <td>{{ ticket.createdBy }}</td>
-          <td>{{ ticket.createdDate | date }}</td> 
+          <td>{{ ticket.createdDate | date }}</td>
           <td>{{ ticket.status }}</td>
           <td>
             <div>
               <button (click)="openDetailsModal(detailsModal, ticket)" style="margin-left:10px;" class="btn btn-sm btn-success">
                 <i class="bi bi-eye"></i>
               </button>
-              <!-- <button [routerLink]="['/tickets/ticket-details', ticket.id]" class="btn btn-sm btn-success">Details</button> -->
               <button [routerLink]="['/tickets', ticket.id]" style="margin-left:10px;" class="btn btn-sm btn-info">
                 <i class="bi bi-pencil"></i>
-              </button>
-              <button (click)="deleteTicket(ticket.id)" style="margin-left:10px;" class="btn btn-sm btn-danger">
-                <i class="bi bi-trash"></i>
               </button>
             </div>
           </td>
@@ -59,44 +92,44 @@
       </tbody>
     </table>
 
-
-    <!--Next previous (Paginated controls)-->
-    <div class="pagination-controls text-center" style="margin-top: 20px;">
-      <button (click)="previousPage()" class="btn btn-secondary btn-sm" [disabled]="currentPage === 1" style="margin-right: 10px;">
-        <i class="bi bi-arrow-left"></i> 
-      </button>
-    
-      <span class="page-info txt" style="font-size: 16px; margin: 0 15px;">
-        <b>Page {{currentPage}} of {{totalPages}}</b>
-      </span>
-    
-      <button (click)="nextPage()" class="btn btn-secondary btn-sm" [disabled]="currentPage === totalPages" style="margin-left: 10px;">
-         <i class="bi bi-arrow-right"></i>
-      </button>
+    <!-- Message for Customer if no tickets are created -->
+    <div *ngIf="tickets.length === 0" class="text-center">
+      <p>No tickets created yet.</p>
+      <button routerLink="/tickets/new" class="btn btn-primary">Add Ticket</button>
     </div>
-    
-
-
-
-    <ng-template #detailsModal let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title" id="ticketDetailsModalLabel">Ticket Details</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Id:</strong> {{ selectedTicket?.id }}</p>
-        <p><strong>Title:</strong> {{ selectedTicket?.title }}</p>
-        <p><strong>Description:</strong> {{ selectedTicket?.description }}</p>
-        <p><strong>Created By:</strong> {{ selectedTicket?.createdBy }}</p>
-        <p><strong>Created Date:</strong> {{ selectedTicket?.createdDate | date }}</p>
-        <!-- <p><strong>Assigned To:</strong> {{ selectedTicket?.assignedTo }}</p> -->
-        <p><strong>Status:</strong> {{ selectedTicket?.status }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
-      </div>
-    </ng-template>
   </div>
-  
 
-  
+  <!-- Pagination (visible for Admin) -->
+  <div *ngIf="isAdmin" class="pagination-controls text-center" style="margin-top: 20px;">
+    <button (click)="previousPage()" class="btn btn-secondary btn-sm" [disabled]="currentPage === 1" style="margin-right: 10px;">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <span class="page-info txt" style="font-size: 16px; margin: 0 15px;">
+      <b>Page {{ currentPage }} of {{ totalPages }}</b>
+    </span>
+
+    <button (click)="nextPage()" class="btn btn-secondary btn-sm" [disabled]="currentPage === totalPages" style="margin-left: 10px;">
+      <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+
+  <!-- Ticket Details Modal -->
+  <ng-template #detailsModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="ticketDetailsModalLabel">Ticket Details</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Id:</strong> {{ selectedTicket?.id }}</p>
+      <p><strong>Title:</strong> {{ selectedTicket?.title }}</p>
+      <p><strong>Description:</strong> {{ selectedTicket?.description }}</p>
+      <p><strong>Created By:</strong> {{ selectedTicket?.createdBy }}</p>
+      <p><strong>Created Date:</strong> {{ selectedTicket?.createdDate | date }}</p>
+      <p><strong>Status:</strong> {{ selectedTicket?.status }}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+    </div>
+  </ng-template>
+</div>
