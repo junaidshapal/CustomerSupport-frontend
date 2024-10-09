@@ -4,6 +4,7 @@ import { TicketService } from '../ticket.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../Services/auth.service';
+import { error } from 'node:console';
 
 
 @Component({
@@ -65,7 +66,21 @@ export class TicketsListComponent implements OnInit {
     }
     else if(this.isCustomer){
       console.log('Load Tickets for customer');
-      //this.ticketService.getCustomerTickets()
+      this.ticketService.getCustomerTickets().subscribe({
+        next:(data) =>{
+          this.tickets = data;
+          this.filteredTickets = data;
+          this.updatePagination();
+
+          if(this.tickets.length === 0){
+            this.message = 'No tickets created';
+          }
+        },
+
+        error: (error)=>{
+          console.log("Error laoding tickets",error);
+        }
+      });
     } 
   }
 

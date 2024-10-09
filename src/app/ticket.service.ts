@@ -28,9 +28,9 @@ export class TicketService {
   }
 
   //Get Role based tickets for customer
-  // getCustomerTickets():Observable<Ticket>{
-
-  // }
+  getCustomerTickets(): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(`${this.apiUrl}/my-tickets`);
+  }
 
   //Create new ticket
   createTicket(ticket: Ticket): Observable<Ticket> {
