@@ -9,6 +9,7 @@ import { TicketComment } from './Model/TicketComment';
   providedIn: 'root',
 })
 export class TicketService {
+
   getCommentsByTicketId(ticketId: number) {
     throw new Error('Method not implemented.');
   }
@@ -26,8 +27,12 @@ export class TicketService {
     return this.http.get<Ticket>(`${this.apiUrl}/${id}`);
   }
 
-  
+  //Get Role based tickets for customer
+  // getCustomerTickets():Observable<Ticket>{
 
+  // }
+
+  //Create new ticket
   createTicket(ticket: Ticket): Observable<Ticket> {
     return this.http.post<Ticket>(this.apiUrl, ticket);
   }
@@ -50,7 +55,7 @@ export class TicketService {
   //   return this.http.get<User[]>(this.usersUrl);
   // }
 
-  // Get comments by ticket ID
+  //Get comments by ticket ID
   // getCommentsByTicketId(ticketId: number): Observable<TicketComment[]> {
   //   return this.http.get<TicketComment[]>(
   //     `${this.commentsUrl}/ticket/${ticketId}`
@@ -72,4 +77,7 @@ export class TicketService {
   deleteComment(commentId: number): Observable<void> {
     return this.http.delete<void>(`${this.commentsUrl}/${commentId}`);
   }
+
+
+  
 }

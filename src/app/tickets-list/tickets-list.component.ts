@@ -49,30 +49,24 @@ export class TicketsListComponent implements OnInit {
     this.loadTickets();
   }
 
-  
-
   loadTickets(): void {
-    if(this.authService.getRole() === 'Admin'){
-      console.log("All tickets loading");
-    }
-    else{
-      console.log("Only customer tickets");
-    }
-    this.ticketService.getTickets().subscribe({
-      next: (data) => {
-        this.tickets = data;
-        this.filteredTickets = data;
-        this.updatePagination();
-
-        if(this.isCustomer && this.tickets.length === 0){
-          this.message = 'No tickets created';
+    if(this.isAdmin){
+      console.log('Load Tickets for customer');
+      this.ticketService.getTickets().subscribe({
+        next: (data) => {
+          this.tickets = data;
+          this.filteredTickets = data;
+          this.updatePagination();
+        },
+        error: (error) => {
+          console.log('Error loading tickets', error);
         }
-
-      },
-      error: (error) => {
-        console.log('Error loading tickets', error);
-      }
-    });
+      });
+    }
+    else if(this.isCustomer){
+      console.log('Load Tickets for customer');
+      //this.ticketService.getCustomerTickets()
+    } 
   }
 
   // Update the paginated tickets based on the selected number of entries and current page
