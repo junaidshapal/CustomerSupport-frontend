@@ -52,7 +52,7 @@ export class TicketsListComponent implements OnInit {
 
   loadTickets(): void {
     if(this.isAdmin){
-      console.log('Load Tickets for customer');
+      console.log('Load Tickets for admin');
       this.ticketService.getTickets().subscribe({
         next: (data) => {
           this.tickets = data;
@@ -66,6 +66,7 @@ export class TicketsListComponent implements OnInit {
     }
     else if(this.isCustomer){
       console.log('Load Tickets for customer');
+      debugger
       this.ticketService.getCustomerTickets().subscribe({
         next:(data) =>{
           this.tickets = data;
