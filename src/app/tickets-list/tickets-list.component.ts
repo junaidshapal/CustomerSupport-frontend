@@ -51,38 +51,57 @@ export class TicketsListComponent implements OnInit {
   }
 
   loadTickets(): void {
-    if(this.isAdmin){
-      console.log('Load Tickets for admin');
-      this.ticketService.getTickets().subscribe({
-        next: (data) => {
-          this.tickets = data;
-          this.filteredTickets = data;
-          this.updatePagination();
-        },
-        error: (error) => {
-          console.log('Error loading tickets for admin', error);
-        }
-      });
-    }
-    else if(this.isCustomer){
-      console.log('Load Tickets for customer');
-      this.ticketService.getCustomerTickets().subscribe({
-        next:(data) =>{
-          this.tickets = data;
-          this.filteredTickets = data;
-          this.updatePagination();
+    console.log('Loading tickets for', this.isAdmin ? 'Admin' : 'Customer');
 
-          if(this.tickets.length === 0){
-            this.message = 'No tickets created';
-          }
-        },
+    this.ticketService.getTickets().subscribe({
+      next: (data) => {
+        this.tickets = data;
+        this.filteredTickets = data;
+        this.updatePagination();
 
-        error: (error)=>{
-          console.log("Error loading tickets for customer",error);
+        if (this.isCustomer && this.tickets.length === 0) {
+          this.message = 'No tickets created';
         }
-      });
-    } 
+      },
+      error: (error) => {
+        console.log('Error loading tickets', error);
+      }
+    });
   }
+
+  // loadTickets(): void {
+  //   if(this.isAdmin){
+  //     console.log('Load Tickets for admin');
+  //     this.ticketService.getTickets().subscribe({
+  //       next: (data) => {
+  //         this.tickets = data;
+  //         this.filteredTickets = data;
+  //         this.updatePagination();
+  //       },
+  //       error: (error) => {
+  //         console.log('Error loading tickets for admin', error);
+  //       }
+  //     });
+  //   }
+  //   else if(this.isCustomer){
+  //     console.log('Load Tickets for customer');
+  //     this.ticketService.getCustomerTickets().subscribe({
+  //       next:(data) =>{
+  //         this.tickets = data;
+  //         this.filteredTickets = data;
+  //         this.updatePagination();
+
+  //         if(this.tickets.length === 0){
+  //           this.message = 'No tickets created';
+  //         }
+  //       },
+
+  //       error: (error)=>{
+  //         console.log("Error loading tickets for customer",error);
+  //       }
+  //     });
+  //   } 
+  // }
 
   // Update the paginated tickets based on the selected number of entries and current page
 
