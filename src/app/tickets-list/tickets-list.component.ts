@@ -60,7 +60,7 @@ export class TicketsListComponent implements OnInit {
           this.updatePagination();
         },
         error: (error) => {
-          console.log('Error loading tickets', error);
+          console.log('Error loading tickets for admin', error);
         }
       });
     }
@@ -79,7 +79,7 @@ export class TicketsListComponent implements OnInit {
         },
 
         error: (error)=>{
-          console.log("Error laoding tickets",error);
+          console.log("Error laoding tickets for customer",error);
         }
       });
     } 

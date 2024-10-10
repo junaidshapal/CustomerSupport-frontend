@@ -86,14 +86,15 @@ export class AuthService {
   }
 
   //Role based Auth
-  getRole(): string | null{
+  getRole(): string | null {
     const token = this.getToken();
-    if(token){
+    if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       return decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || null;
     }
     return null;
   }
+  
 
   //Specific role
   hasRole(role: string):boolean{
@@ -110,10 +111,20 @@ export class AuthService {
   //   return !!localStorage.getItem('jwtToken');
   // }
 
+  // isAuthenticated(): boolean {
+  //   const token = this.getToken();
+  //   return !!token && !this.jwtHelper.isTokenExpired(token);
+  // }
+
   isAuthenticated(): boolean {
     const token = this.getToken();
-    return !!token && !this.jwtHelper.isTokenExpired(token);
+    if (!token || this.jwtHelper.isTokenExpired(token)) {
+      console.log('Token is either missing or expired.');
+      return false;
+    }
+    return true;
   }
+  
   
   // Get token
   getToken(): string | null {

@@ -71,10 +71,17 @@ constructor(private authService: AuthService, private router: Router) {}
 login() {
   this.authService.login(this.loginData).subscribe({
     next: (response) => {
-      if (this.authService.isAuthenticated()) {
-        this.router.navigate(['/home']);
+      const role = this.authService.getRole();
+      if(role == 'Admin'){
+        this.router.navigate(['/admin-tickets']);
       }
-    },
+      else if(role == 'Customer'){
+        this.router.navigate(['/customer-tickets']);
+      }
+      // if (this.authService.isAuthenticated()) {
+      //   this.router.navigate(['/home']);
+      // }
+    },  
     error: (err) => {
       console.log('Login failed:', err);
     },
