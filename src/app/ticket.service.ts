@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Ticket } from './Model/Ticket';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { User } from './Model/User';
 import { TicketComment } from './Model/TicketComment';
 
@@ -9,6 +9,7 @@ import { TicketComment } from './Model/TicketComment';
   providedIn: 'root',
 })
 export class TicketService {
+  authService: any;
 
   getCommentsByTicketId(ticketId: number) {
     throw new Error('Method not implemented.');
@@ -33,9 +34,23 @@ export class TicketService {
   }
 
   //Create new ticket
+  // createTicket(ticket: Ticket): Observable<Ticket> {
+  //   return this.http.post<Ticket>(this.apiUrl, ticket);
+  // }
+
   createTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(this.apiUrl, ticket);
+    return this.http.post<Ticket>(this.apiUrl, ticket).pipe(
+      catchError((error) => {
+        console.log('Error creating ticket:', error);
+        if (error.status === 401) {
+          console.log('Token expired or unauthorized. Logging out.');
+          this.authService.logout();
+        }
+        return throwError(error);
+      })
+    );
   }
+  
 
   updateTicket(id: number, ticket: Ticket): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, ticket);

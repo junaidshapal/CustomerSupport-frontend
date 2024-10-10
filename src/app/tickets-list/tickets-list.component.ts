@@ -66,7 +66,6 @@ export class TicketsListComponent implements OnInit {
     }
     else if(this.isCustomer){
       console.log('Load Tickets for customer');
-      debugger
       this.ticketService.getCustomerTickets().subscribe({
         next:(data) =>{
           this.tickets = data;
@@ -79,7 +78,7 @@ export class TicketsListComponent implements OnInit {
         },
 
         error: (error)=>{
-          console.log("Error laoding tickets for customer",error);
+          console.log("Error loading tickets for customer",error);
         }
       });
     } 
