@@ -6,6 +6,7 @@ import { User } from '../Model/User';
 import { Console, error } from 'console';
 import { TicketComment } from '../Model/TicketComment';
 import { ChangeDetectorRef } from '@angular/core';
+import { AuthService } from '../Services/auth.service';
 
 
 @Component({
@@ -64,7 +65,8 @@ export class AddTicketComponent implements OnInit {
     private ticketService: TicketService,
     private route: ActivatedRoute,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -136,10 +138,16 @@ export class AddTicketComponent implements OnInit {
       return;
     }
 
+    if (!this.authService.isAuthenticated()) {
+      console.log('Token has expired or user is not authenticated. Redirecting to login.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
     if (this.ticket.id) {
       this.ticketService.updateTicket(this.ticket.id, this.ticket).subscribe({
         next: () => {
-          console.log("y")
+          console.log("Ticket Updated Successfully")
           this.router.navigate(['/tickets']);
         },
         error: (error) => 
@@ -148,6 +156,7 @@ export class AddTicketComponent implements OnInit {
     } else {
         this.ticketService.createTicket(this.ticket).subscribe({
         next: () => {
+          console.log('Ticket created Successfully');
           this.router.navigate(['/tickets']);
         },
         error: (error) => 
