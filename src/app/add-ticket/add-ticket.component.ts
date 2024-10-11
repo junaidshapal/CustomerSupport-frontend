@@ -96,17 +96,6 @@ export class AddTicketComponent implements OnInit {
     
   }
 
-  //Method to load Users
-  // loadUsers(): void {
-  //   this.ticketService.getUsers().subscribe({
-  //     next: (data) => {
-  //       this.users = data;
-  //     },
-  //     error: (error) => {
-  //       console.log('Error loading ticket', error);
-  //     },
-  //   });
-  // }
 
   //Method to load Commments
   // loadComments(ticketId: number): void {

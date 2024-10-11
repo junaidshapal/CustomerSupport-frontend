@@ -136,18 +136,13 @@ export class TicketsListComponent implements OnInit {
   }
 
 
-  //Implementation of show entries of ticket
-
-
   //Modal for ticketDetails
   openDetailsModal(content: TemplateRef<any>, ticket: Ticket): void {
     this.selectedTicket = ticket;
     this.modalService.open(content, { ariaLabelledBy: 'ticketDetailsModalLabel' });
   }
 
-  // viewDetails(ticketId: number):void{
-  //   this.router.navigate(['/ticket-details', ticketId]);
-  // }
+  
 
   //Search tickets method
   // searchTickets():void{

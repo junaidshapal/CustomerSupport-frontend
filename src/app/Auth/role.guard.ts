@@ -25,20 +25,5 @@ export class RoleGuard implements CanActivate {
       return false;
     }
     return true;
-  //  if (!isAuthenticated) {
-  //   console.log('User is not authenticated. Redirecting to login.');
-  //   this.router.navigate(['login']);
-  //   return false;
-  // }
-
-  // if (userRole !== expectedRole) {
-  //   console.log(`Role mismatch. Expected: ${expectedRole}, but got: ${userRole}. Redirecting to login.`);
-  //   this.router.navigate(['login']);
-  //   return false;
-  // }
-
-  // console.log('Role match! Access granted.');
-  // return true;
-  // }
   }
 }
