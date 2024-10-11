@@ -28,15 +28,6 @@ export class TicketService {
     return this.http.get<Ticket>(`${this.apiUrl}/${id}`);
   }
 
-  // //Get Role based tickets for customer
-  // getCustomerTickets(): Observable<Ticket[]> {
-  //   return this.http.get<Ticket[]>(`${this.apiUrl}/my-tickets`);
-  // }
-
-  //Create new ticket
-  // createTicket(ticket: Ticket): Observable<Ticket> {
-  //   return this.http.post<Ticket>(this.apiUrl, ticket);
-  // }
 
   createTicket(ticket: Ticket): Observable<Ticket> {
     return this.http.post<Ticket>(this.apiUrl, ticket).pipe(
