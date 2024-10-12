@@ -10,18 +10,33 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
 import { RoleGuard } from './Auth/role.guard';
 
 
+// const routes: Routes = [
+//   { path: '', redirectTo: 'login', pathMatch: 'full' },
+//   { path: 'login', component: LoginComponent },
+//   { path: 'register', component: RegisterComponent },
+//   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+//   { path: 'admin-tickets', component: TicketsListComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'Admin' }},
+//    // Route for customers to view only their own tickets
+//    { path: 'customer-tickets', component: TicketsListComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'Customer' }},
+//   { path: 'tickets/:id', component: AddTicketComponent, canActivate: [AuthGuard] },
+//   { path: 'tickets/ticket-details/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
+//   { path: '**', redirectTo: 'login' }
+// ];
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'admin-tickets', component: TicketsListComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'Admin' }},
-   // Route for customers to view only their own tickets
-   { path: 'customer-tickets', component: TicketsListComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'Customer' }},
+
+  // Single route for both Admin and Customer
+  { path: 'tickets', component: TicketsListComponent, canActivate: [AuthGuard] },
+
   { path: 'tickets/:id', component: AddTicketComponent, canActivate: [AuthGuard] },
   { path: 'tickets/ticket-details/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login' }
 ];
+
 
 
 
