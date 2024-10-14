@@ -7,8 +7,8 @@ import { AuthService } from '../../Services/auth.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
-
   constructor(private authService: AuthService){}
+  
   
   ngOnInit(): void {
     if (this.authService.getRole() === 'Admin') {
@@ -16,8 +16,6 @@ export class HomeComponent implements OnInit{
     } else {
       console.log('This user is a Customer');
     }
-    
   }
-
 
 }
