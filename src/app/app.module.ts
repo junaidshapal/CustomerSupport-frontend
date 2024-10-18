@@ -18,6 +18,7 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './Auth/token.interceptor';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 
 
 export function tokenGetter(){
@@ -35,7 +36,8 @@ export function tokenGetter(){
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    TicketDetailsComponent
+    TicketDetailsComponent,
+    ManageUsersComponent
   ],
   imports: [
     BrowserModule,

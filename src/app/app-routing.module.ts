@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TicketDetailsComponent } from './components/ticket-details/ticket-details.component';
 import { RoleGuard } from './Auth/role.guard';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 
 
 // const routes: Routes = [
@@ -28,16 +29,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-
   // Single route for both Admin and Customer
   { path: 'tickets', component: TicketsListComponent, canActivate: [AuthGuard] },
-
+  { path: 'manage-users', component: ManageUsersComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRole: 'Admin' }},
   { path: 'tickets/:id', component: AddTicketComponent, canActivate: [AuthGuard] },
   { path: 'tickets/ticket-details/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login' }
 ];
-
-
 
 
 @NgModule({
