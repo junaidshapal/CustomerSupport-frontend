@@ -7,7 +7,7 @@ import { AdminService } from '../../Services/admin.service';
   styleUrl: './manage-users.component.css'
 })
 export class ManageUsersComponent implements OnInit {
-  users:any[] = [];
+  users:any [] = [];
   
   constructor(private adminService:AdminService){}
   ngOnInit(): void {
@@ -18,6 +18,7 @@ export class ManageUsersComponent implements OnInit {
   loadUsers():void{
     this.adminService.getAllUSers().subscribe({
       next:(data) => {
+        console.log('Fetched users:', data);
         this.users = data;
       },
       error:(err) =>{

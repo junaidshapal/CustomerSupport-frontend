@@ -1,1 +1,25 @@
-<p>manage-users works!</p>
+<div class="container">
+    <h2>Manage Users</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.userName }}</td> <!-- Ensure correct casing -->
+          <td>{{ user.email }}</td>    <!-- Ensure correct casing -->
+          <td>{{ user.isApproved ? 'Approved' : 'Blocked' }}</td>
+          <td>
+            <button *ngIf="!user.isApproved" (click)="approveUser(user.id)" class="btn btn-success">Approve</button>
+            <button *ngIf="user.isApproved" (click)="blockUser(user.id)" class="btn btn-danger">Block</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
