@@ -7,7 +7,7 @@
     <nav class="nav flex-column p-3 flex-grow-1">
       <a  class="nav-link text-white" [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
       <a class="nav-link text-white" [routerLink]="['/tickets']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Tickets</a>
-      <a  class="nav-link text-white" [routerLink]="['/contact']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Contact</a>
+      <a *ngIf="isAdmin" class="nav-link text-white" [routerLink]="['/manage-users']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Manage Users</a>
     </nav>
     <div class="mt-auto p-3">
       <a class="nav-link bg-danger text-white logout" (click)="logout()">Logout</a>

@@ -11,8 +11,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let user of users">
-          <td>{{ user.userName }}</td> <!-- Ensure correct casing -->
-          <td>{{ user.email }}</td>    <!-- Ensure correct casing -->
+          <td>{{ user.userName }}</td> 
+          <td>{{ user.email }}</td>    
           <td>{{ user.isApproved ? 'Approved' : 'Blocked' }}</td>
           <td>
             <button *ngIf="!user.isApproved" (click)="approveUser(user.id)" class="btn btn-success">Approve</button>

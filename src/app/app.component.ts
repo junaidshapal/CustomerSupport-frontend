@@ -12,12 +12,14 @@ import { NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'CustomerSupportApp';
 
+  isAdmin:boolean = false;
+
   showSidebar = true;
   showNavbar = true;
 
   constructor(private router: Router, public authService: AuthService) {}
 
-  ngOnInit() {
+  ngOnInit() { 
     this.router.events.subscribe(() => {
       const currentRoute = this.router.url;
       // Check if the current route is login or register, and hide the sidebar accordingly
@@ -30,4 +32,6 @@ export class AppComponent implements OnInit{
       }
     });
   }
+
+  
 }
