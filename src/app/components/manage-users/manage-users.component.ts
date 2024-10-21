@@ -31,7 +31,7 @@ export class ManageUsersComponent implements OnInit {
   approveUser(userId: string){
     this.adminService.approveUser(userId).subscribe({
       next:() => {
-        console.log('')
+        console.log('');
         this.loadUsers(); //Load users after approve
       },
       error:(err) =>{
@@ -40,7 +40,7 @@ export class ManageUsersComponent implements OnInit {
     });
   }
 
-  blockUser(userId:string){
+  blockUser(userId: string){
     this.adminService.blockUser(userId).subscribe({
       next:() => {
           this.loadUsers();
