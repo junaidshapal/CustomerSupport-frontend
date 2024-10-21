@@ -31,7 +31,7 @@ export class ManageUsersComponent implements OnInit {
   approveUser(userId: string){
     this.adminService.approveUser(userId).subscribe({
       next:() => {
-        console.log('');
+        console.log('Approved user');
         this.loadUsers(); //Load users after approve
       },
       error:(err) =>{
