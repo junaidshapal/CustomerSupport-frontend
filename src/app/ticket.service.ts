@@ -1,20 +1,20 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Ticket } from './Model/Ticket';
 import { catchError, Observable, throwError } from 'rxjs';
 import { User } from './Model/User';
 import { TicketComment } from './Model/TicketComment';
+import { AuthService } from './Services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TicketService {
-  authService: any;
 
   getCommentsByTicketId(ticketId: number) {
     throw new Error('Method not implemented.');
   }
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   private apiUrl = 'https://localhost:7077/api/Tickets';
   //private usersUrl = 'https://localhost:7077/api/Users';
@@ -29,19 +29,42 @@ export class TicketService {
   }
 
 
+  // createTicket(ticket: Ticket): Observable<Ticket> {
+  //   return this.http.post<Ticket>(this.apiUrl, ticket).pipe(
+  //     catchError((error) => {
+  //       console.log('Error creating ticket:', error);
+  //       if (error.status === 401) {
+  //         console.log('Token expired or unauthorized. Logging out.');
+  //         this.authService.logout();
+  //       }
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
+  
+
   createTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(this.apiUrl, ticket).pipe(
+    const token = this.authService.getToken(); // Fetch token using AuthService
+    if (!token) {
+      console.error('No token found! Redirecting to login...');
+      return throwError('No token found');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`  // Add token to the request headers
+    });
+
+    return this.http.post<Ticket>(this.apiUrl, ticket, { headers }).pipe(
       catchError((error) => {
         console.log('Error creating ticket:', error);
         if (error.status === 401) {
-          console.log('Token expired or unauthorized. Logging out.');
+          console.log('Unauthorized. Logging out.');
           this.authService.logout();
         }
         return throwError(error);
       })
     );
   }
-  
 
   updateTicket(id: number, ticket: Ticket): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, ticket);
