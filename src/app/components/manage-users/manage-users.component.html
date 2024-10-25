@@ -14,10 +14,10 @@
           <td>{{ user.userName }}</td> 
           <td>{{ user.email }}</td>    
           <td>{{ user.isApproved ? 'Approved' : 'Blocked' }}</td>
-          <td>
+          <!-- <td>
             <button *ngIf="!user.isApproved" (click)="approveUser(user.id)" class="btn btn-success">Approve</button>
             <button *ngIf="user.isApproved" (click)="blockUser(user.id)" class="btn btn-danger">Block</button>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>

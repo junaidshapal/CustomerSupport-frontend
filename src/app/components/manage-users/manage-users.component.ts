@@ -11,43 +11,43 @@ export class ManageUsersComponent implements OnInit {
   
   constructor(private adminService:AdminService){}
   ngOnInit(): void {
-    this.loadUsers();
+    //this.loadUsers();
   }
 
 
-  loadUsers():void{
-    this.adminService.getAllUSers().subscribe({
-      next:(data) => {
-        console.log('Fetched users:', data);
-        this.users = data;
-      },
-      error:(err) =>{
-        console.log("error loading users", err);
-      }
-    });
-  }
+  // loadUsers():void{
+  //   this.adminService.getAllUSers().subscribe({
+  //     next:(data) => {
+  //       console.log('Fetched users:', data);
+  //       this.users = data;
+  //     },
+  //     error:(err) =>{
+  //       console.log("error loading users", err);
+  //     }
+  //   });
+  // }
 
 
-  approveUser(userId: string){
-    this.adminService.approveUser(userId).subscribe({
-      next:() => {
-        console.log('Approved user');
-        this.loadUsers(); //Load users after approve
-      },
-      error:(err) =>{
-        console.log("Error approving user", err);
-      }
-    });
-  }
+  // approveUser(userId: string){
+  //   this.adminService.approveUser(userId).subscribe({
+  //     next:() => {
+  //       console.log('Approved user');
+  //       this.loadUsers(); //Load users after approve
+  //     },
+  //     error:(err) =>{
+  //       console.log("Error approving user", err);
+  //     }
+  //   });
+  // }
 
-  blockUser(userId: string){
-    this.adminService.blockUser(userId).subscribe({
-      next:() => {
-          this.loadUsers();
-      },
-      error:(err) =>{
-        console.log("Error blocking user", err);
-      }
-    })
-  }
+  // blockUser(userId: string){
+  //   this.adminService.blockUser(userId).subscribe({
+  //     next:() => {
+  //         this.loadUsers();
+  //     },
+  //     error:(err) =>{
+  //       console.log("Error blocking user", err);
+  //     }
+  //   })
+  // }
 }
