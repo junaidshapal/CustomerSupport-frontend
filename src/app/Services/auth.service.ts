@@ -32,21 +32,21 @@ export class AuthService {
   }
 
   //Role based Auth
-  getRole(): string | null {
-    const token = this.getToken();
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      return decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || null;
-    }
-    return null;
-  }
+  // getRole(): string | null {
+  //   const token = this.getToken();
+  //   if (token) {
+  //     const decodedToken = this.jwtHelper.decodeToken(token);
+  //     return decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || null;
+  //   }
+  //   return null;
+  // }
   
 
   //Specific role
-  hasRole(role: string):boolean{
-    const userRole = this.getRole();
-    return userRole === role; 
-  }
+  // hasRole(role: string):boolean{
+  //   const userRole = this.getRole();
+  //   return userRole === role; 
+  // }
 
    // Logout User
    logout(): void {
