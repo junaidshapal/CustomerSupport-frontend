@@ -29,18 +29,18 @@ export class TicketService {
   }
 
 
-  createTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(this.apiUrl, ticket).pipe(
-      catchError((error) => {
-        console.log('Error creating ticket:', error);
-        if (error.status === 401) {
-          console.log('Token expired or unauthorized. Logging out.');
-          this.authService.logout();
-        }
-        return throwError(error);
-      })
-    );
-  }
+  // createTicket(ticket: Ticket): Observable<Ticket> {
+  //   return this.http.post<Ticket>(this.apiUrl, ticket).pipe(
+  //     catchError((error) => {
+  //       console.log('Error creating ticket:', error);
+  //       if (error.status === 401) {
+  //         console.log('Token expired or unauthorized. Logging out.');
+  //         this.authService.logout();
+  //       }
+  //       return throwError(error);
+  //     })
+  //   );
+  // }
   
 
   createTicket(ticket: Ticket): Observable<Ticket> {
