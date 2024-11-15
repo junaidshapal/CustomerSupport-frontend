@@ -15,6 +15,7 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, user);
   }
 
+  //Login with credentials
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
       map((response: any) => {
