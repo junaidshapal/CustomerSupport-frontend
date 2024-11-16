@@ -58,7 +58,6 @@ export class TicketService {
       catchError((error) => {
         console.log('Error creating ticket:', error);
         if (error.status === 401) {
-          //error shown in console
           console.log('Unauthorized. Logging out.');
           this.authService.logout();
         }
