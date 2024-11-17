@@ -58,19 +58,19 @@ export class AuthService {
   //   return !!localStorage.getItem('jwtToken');
   // }
 
-  // isAuthenticated(): boolean {
-  //   const token = this.getToken();
-  //   return !!token && !this.jwtHelper.isTokenExpired(token);
-  // }
-
   isAuthenticated(): boolean {
     const token = this.getToken();
-    if (!token || this.jwtHelper.isTokenExpired(token)) {
-      console.log('Token is either missing or expired.');
-      return false;
-    }
-    return true;
+    return !!token && !this.jwtHelper.isTokenExpired(token);
   }
+
+  // isAuthenticated(): boolean {
+  //   const token = this.getToken();
+  //   if (!token || this.jwtHelper.isTokenExpired(token)) {
+  //     console.log('Token is either missing or expired.');
+  //     return false;
+  //   }
+  //   return true;
+  // }
   
   
   // Get token
