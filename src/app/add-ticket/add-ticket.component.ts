@@ -267,7 +267,7 @@ export class AddTicketComponent implements OnInit {
     this.router.navigate(['/tickets']);
   }
 
-  //Reset comment form after adding or updateing comment
+  //Reset comment form after adding or updating comment
   resetCommentForm(): void {
     this.newComment = {
       id: 0,
