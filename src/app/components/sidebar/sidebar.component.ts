@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit{
 
   constructor(public authService:AuthService, private router:Router){}
 
+  //will have to create the collapse sidebar
 
   isAdmin: boolean = false;
   ngOnInit(): void {
