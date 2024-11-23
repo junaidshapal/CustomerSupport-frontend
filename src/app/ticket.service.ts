@@ -53,7 +53,6 @@ export class TicketService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`  // Add token to the request headers
     });
-    //jifhdgsfdgk
 
     return this.http.post<Ticket>(this.apiUrl, ticket, { headers }).pipe(
       catchError((error) => {
