@@ -16,7 +16,21 @@ export class AuthService {
   }
 
   //Login with credentials
-  
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+      map((response: any) => {
+        console.log('Login successful', response);
+        if (response.token) {
+          localStorage.setItem('jwtToken', response.token);
+        }
+        return response;
+      }),
+      catchError((err) => {
+        console.error('Login error:', err);
+        return throwError(err);
+      })
+    );
+  }
 
   //Role based Auth
   getRole(): string | null {
