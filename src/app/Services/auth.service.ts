@@ -43,7 +43,7 @@ export class AuthService {
   }
   
 
-  //Specific role
+  //has Specific role
   hasRole(role: string):boolean{
     const userRole = this.getRole();
     return userRole === role; 
